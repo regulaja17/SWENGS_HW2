@@ -1,0 +1,37 @@
+<table mat-table [dataSource]="musicians" class="table-layout">
+  <ng-container matColumnDef="alias">
+    <th mat-header-cell *matHeaderCellDef>DJ name</th>
+    <td mat-cell *matCellDef="let musician" class="cell-layout">{{musician.alias}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="first_name">
+  <th mat-header-cell *matHeaderCellDef class="cell-layout">First name</th>
+  <td mat-cell *matCellDef="let musician" class="cell-layout">{{musician.first_name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="last_name">
+  <th mat-header-cell *matHeaderCellDef class="cell-layout">Last name</th>
+  <td mat-cell *matCellDef="let musician" class="cell-layout">{{musician.last_name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="label">
+    <th mat-header-cell *matHeaderCellDef>Label</th>
+    <td mat-cell *matCellDef="let musician" class="cell-layout">
+      <ng-container *ngFor="let label of musician.label">
+        {{label.name}}
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef class="actions-header">Actions</th>
+    <td mat-cell *matCellDef="let musician">
+      <button mat-button [routerLink]="'/musician-edit/' + musician.id">Edit</button>
+      <button mat-button (click)="deleteMusician(musician)">Delete</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

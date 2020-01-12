@@ -1,0 +1,57 @@
+<form [formGroup]="songFormGroup" class="class-form">
+  <mat-form-field>
+    <input matInput type="text" placeholder="Title" formControlName="title" class="input-layout">
+    <mat-hint align="end">The title of this song</mat-hint>
+    <mat-error *ngIf="songFormGroup.controls.title.hasError('required')">Title is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Features" formControlName="features" class="input-layout">
+    <mat-hint align="end">Features of this song</mat-hint>
+    <mat-error *ngIf="songFormGroup.controls.features.hasError('shouldNotContainNumber')">No numbers allowed</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Genre" formControlName="genre">
+      <mat-option [value]="genre.key" *ngFor="let genre of genreService.genreNames | keyvalue">{{genre.value}}</mat-option>
+    </mat-select>
+    <mat-hint align="end">The genre of this song</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="date" placeholder="Set the release date" formControlName="release_date" class="input-layout">
+    <mat-hint align="end">The release date of this song</mat-hint>
+    <mat-error *ngIf="songFormGroup.controls.release_date.hasError('invalid')">Date is invalid</mat-error>
+    <mat-error *ngIf="songFormGroup.controls.release_date.hasError('required')">Date is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number" placeholder="Duration" formControlName="duration" step="0.01" class="input-layout">
+    <mat-hint align="end">The duration of the song</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Label" formControlName="label">
+      <mat-option [value]="label.id" *ngFor="let label of labelOptions">{{label.name}}</mat-option>
+    </mat-select>
+    <mat-hint align="end">The Label of this song</mat-hint>
+    <mat-error *ngIf="songFormGroup.controls.label.hasError('required')">Label is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select multiple placeholder="Producer" formControlName="producer">
+      <mat-option [value]="musician.id" *ngFor="let musician of musicianOptions">{{musician.alias}}</mat-option>
+    </mat-select>
+    <mat-hint align="end">Producer of this song</mat-hint>
+    <mat-error *ngIf="songFormGroup.controls.producer.hasError('required')">Producer is required</mat-error>
+  </mat-form-field>
+
+  <br/>
+  <mat-card-actions align="center">
+    <button mat-raised-button color="primary" [disabled]="!songFormGroup.valid" (click)="createSong()">
+      <span *ngIf="!songFormGroup.controls.id.value">Create</span>
+      <span *ngIf="songFormGroup.controls.id.value">Update</span>
+    </button>
+  </mat-card-actions>
+</form>
+

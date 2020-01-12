@@ -1,0 +1,44 @@
+<form [formGroup]="musicianFormGroup" class="class-form">
+  <mat-form-field>
+    <input matInput type="text" placeholder="DJ name" formControlName="alias" class="input-layout">
+    <mat-hint align="end">Name of the DJ</mat-hint>
+    <mat-error *ngIf="musicianFormGroup.controls.alias.hasError('required')">DJ name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="First name" formControlName="first_name" class="input-layout">
+    <mat-hint align="end">First name of this song</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Last name" formControlName="last_name" class="input-layout">
+    <mat-hint align="end">Last name of this song</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select multiple placeholder="Label" formControlName="label">
+      <mat-option [value]="label1.id" *ngFor="let label1 of labelOptions">{{label1.name}}</mat-option>
+    </mat-select>
+    <mat-hint align="end">Labels for this DJ</mat-hint>
+    <mat-error *ngIf="musicianFormGroup.controls.label.hasError('required')">Label is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Year of birth" formControlName="year_of_birth" class="input-layout">
+      <mat-option [value]="year_of_birth" *ngFor="let year_of_birth of yearOptions">{{year_of_birth}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="musicianFormGroup.controls.year_of_birth.hasError('required')">Year of birth is required</mat-error>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="active" class="input-layout">Active</mat-checkbox>
+
+
+  <br/>
+  <mat-card-actions align="center">
+    <button mat-raised-button color="primary" [disabled]="!musicianFormGroup.valid" (click)="createMusician()">
+      <span *ngIf="!musicianFormGroup.controls.id.value">Create</span>
+      <span *ngIf="musicianFormGroup.controls.id.value">Update</span>
+    </button>
+  </mat-card-actions>
+</form>
+

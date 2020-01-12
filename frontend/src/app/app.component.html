@@ -1,0 +1,21 @@
+<mat-toolbar>
+  <button mat-button [matMenuTriggerFor]="songMenu" *ngIf="isLoggedIn">Songs</button>
+  <mat-menu #songMenu="matMenu">
+    <button mat-menu-item routerLink="song-list">List
+      songs</button>
+    <button mat-menu-item routerLink="song-form">Create
+      song</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="musicianMenu" *ngIf="isLoggedIn">Musicians</button>
+  <mat-menu #musicianMenu="matMenu">
+    <button mat-menu-item routerLink="musician-list">List
+      musicians</button>
+    <button mat-menu-item routerLink="musician-form">Create
+      musician</button>
+  </mat-menu>
+
+  <app-logout class="logout-button-layout" *ngIf="isLoggedIn"></app-logout>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
